@@ -1,5 +1,5 @@
 <template>
-  <IonApp> <IonRouterView /><Tabs /> </IonApp>
+  <IonApp> <IonRouterView /> <Tabs /></IonApp>
 </template>
 
 <script lang="ts">

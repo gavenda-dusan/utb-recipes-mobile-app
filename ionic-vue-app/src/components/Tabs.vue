@@ -1,53 +1,37 @@
 
 <template>
-  <div class="ion-page stick-to-bottom">
-    <IonTab>
-      <IonTab>
-        <ion-vue-router name="Home"></ion-vue-router>
-        <!-- <RouterLink to="/">Home</RouterLink> -->
-      </IonTab>
+  <IonTabs>
+    <IonTab tab="home"> </IonTab>
+    <IonTab tab="about"> </IonTab>
 
-      <IonTab tab="tab2">
-        <ion-vue-router name="About"></ion-vue-router>
-        <!-- <RouterLink to="/about">About</RouterLink> -->
-      </IonTab>
-
-      <IonTabBar>
-        <IonTabButton tab="Home">
-          <IonLabel>Home</IonLabel>
-        </IonTabButton>
-
-        <IonTabButton tab="About" :to="{ name: 'About' }">
-          <IonLabel>About</IonLabel>
-        </IonTabButton>
-      </IonTabBar>
-    </IonTab>
-  </div>
+    <IonTabBar class="stick-to-bottom">
+      <IonTabButton tab="home" href="/">
+        <IonLabel>Home</IonLabel>
+      </IonTabButton>
+      <IonTabButton tab="about" href="/about">
+        <IonLabel>About</IonLabel></IonTabButton
+      >
+    </IonTabBar>
+  </IonTabs>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import {
-  IonPage,
-  IonContent,
   IonTab,
   IonTabBar,
   IonTabButton,
   IonTabs,
-  IonLabel,
-  IonIcon
+  IonLabel
 } from "@modus/ionic-vue";
 
 @Options({
   components: {
-    IonPage,
-    IonContent,
     IonTab,
     IonTabBar,
     IonTabButton,
     IonTabs,
-    IonLabel,
-    IonIcon
+    IonLabel
   }
 })
 export default class Tabs extends Vue {}
