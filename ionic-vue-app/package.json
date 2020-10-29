@@ -10,9 +10,11 @@
   "dependencies": {
     "@ionic/core": "^5.4.1",
     "@modus/ionic-vue": "^3.0.0-beta.1",
+    "axios": "^0.21.0",
     "core-js": "^3.6.5",
     "vue": "^3.0.0",
     "vue-class-component": "^8.0.0-0",
+    "vue-property-decorator": "^9.0.2",
     "vue-router": "^4.0.0-0"
   },
   "devDependencies": {
@@ -46,15 +48,14 @@
     ],
     "parserOptions": {
       "ecmaVersion": 2020
-    },
-    "rules": {
-      "vue/no-deprecated-slot-attribute": "warn",
-      "vue/no-deprecated-slot-scope-attribute": "warn"
     }
   },
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "config": {
+    "ionic_source_map": "source-map"
+  }
 }

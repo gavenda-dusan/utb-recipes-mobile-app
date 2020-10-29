@@ -1,36 +1,26 @@
 
 <template>
-  <IonTabs>
-    <IonTab tab="home"> </IonTab>
-    <IonTab tab="about"> </IonTab>
-
-    <IonTabBar class="stick-to-bottom">
-      <IonTabButton tab="home" href="/">
-        <IonLabel>Home</IonLabel>
-      </IonTabButton>
-      <IonTabButton tab="about" href="/about">
-        <IonLabel>About</IonLabel></IonTabButton
-      >
-    </IonTabBar>
-  </IonTabs>
+  <IonTab tab="home"> </IonTab>
+  <IonTab tab="recipes"> </IonTab>
+  <IonTabBar class="stick-to-bottom">
+    <IonTabButton tab="home" href="/">
+      <IonLabel>Home</IonLabel>
+    </IonTabButton>
+    <IonTabButton tab="recipes" href="/recipes">
+      <IonLabel>Recipes</IonLabel></IonTabButton
+    >
+  </IonTabBar>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import {
-  IonTab,
-  IonTabBar,
-  IonTabButton,
-  IonTabs,
-  IonLabel
-} from "@modus/ionic-vue";
+import { IonTab, IonTabBar, IonTabButton, IonLabel } from "@modus/ionic-vue";
 
 @Options({
   components: {
     IonTab,
     IonTabBar,
     IonTabButton,
-    IonTabs,
     IonLabel
   }
 })
