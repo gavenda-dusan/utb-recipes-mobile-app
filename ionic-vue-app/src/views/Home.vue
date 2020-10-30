@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="ion-page">
     <IonHeader>
       <IonToolbar>
         <div>
@@ -7,12 +7,15 @@
         </div>
       </IonToolbar>
     </IonHeader>
-    <h2>This is application made for ABMTE 2020.</h2>
-    <h3>Author: Dušan Gavenda</h3>
-    <p>
-      Purpose of the application is to connect to edamam.com recipes API and
-      provide recipes to the user.
-    </p>
+
+    <IonContent>
+      <h2>This is application made for ABMTE 2020.</h2>
+      <h3>Author: Dušan Gavenda</h3>
+      <p>
+        Purpose of the application is to connect to edamam.com recipes API and
+        provide recipes to the user.
+      </p>
+    </IonContent>
   </div>
 </template>
 

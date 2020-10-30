@@ -5,7 +5,7 @@
         v-for="recipe in recipes"
         :key="recipe.recipe.label"
         button
-        @click="test(recipe.recipe.uri)"
+        @click="moveToDetail(recipe.recipe.uri)"
       >
         <IonRow>
           <IonCol>
@@ -36,7 +36,8 @@ import { Hit } from "@/models/Hit";
 export default class RecipesTable extends Vue {
   @Prop({ required: true }) recipes = Array<Hit>();
 
-  test(uri: string) {
+  moveToDetail(uri: string) {
+    console.log(this.$router);
     this.$router.push({ name: `RecipeDetail`, params: { link: uri } });
   }
 }

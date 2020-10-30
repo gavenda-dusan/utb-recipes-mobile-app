@@ -2,12 +2,16 @@
 <template>
   <IonTab tab="home"> </IonTab>
   <IonTab tab="recipes"> </IonTab>
-  <IonTabBar class="stick-to-bottom">
+  <IonTab tab="favorites"> </IonTab>
+  <IonTabBar>
     <IonTabButton tab="home" href="/">
       <IonLabel>Home</IonLabel>
     </IonTabButton>
     <IonTabButton tab="recipes" href="/recipes">
       <IonLabel>Recipes</IonLabel></IonTabButton
+    >
+    <IonTabButton tab="favorites" href="/favorites">
+      <IonLabel>Favorites</IonLabel></IonTabButton
     >
   </IonTabBar>
 </template>

@@ -1,25 +1,27 @@
 <template>
-  <div>
+  <div class="ion-page">
     <IonHeader>
       <IonToolbar>
         <IonTitle>Recipes browser</IonTitle>
       </IonToolbar>
     </IonHeader>
 
-    <IonItem>
-      <IonLabel position="floating">Search term</IonLabel>
-      <IonInput type="text" inputmode="text" v-model="searchText"></IonInput>
-    </IonItem>
-    <IonItem>
-      <IonLabel>Diet type</IonLabel>
-      <IonSelect interface="popover" v-model="selectedDiet">
-        <IonSelectOption v-for="diet in dietLabels" :key="diet.Name">{{
-          diet.Name
-        }}</IonSelectOption>
-      </IonSelect>
-    </IonItem>
-    <IonButton expand="block" @click="searchForRecipes">Search</IonButton>
-    <RecipesTable :recipes="recipes"></RecipesTable>
+    <IonContent>
+      <IonItem>
+        <IonLabel position="floating">Search term</IonLabel>
+        <IonInput type="text" inputmode="text" v-model="searchText"></IonInput>
+      </IonItem>
+      <IonItem>
+        <IonLabel>Diet type</IonLabel>
+        <IonSelect interface="popover" v-model="selectedDiet">
+          <IonSelectOption v-for="diet in dietLabels" :key="diet.Name">{{
+            diet.Name
+          }}</IonSelectOption>
+        </IonSelect>
+      </IonItem>
+      <IonButton expand="block" @click="searchForRecipes">Search</IonButton>
+      <RecipesTable :recipes="recipes"></RecipesTable>
+    </IonContent>
   </div>
 </template>
 
@@ -35,7 +37,8 @@ import {
   IonTextarea,
   IonButton,
   IonSelect,
-  IonSelectOption
+  IonSelectOption,
+  IonContent
 } from "@modus/ionic-vue";
 import axios from "axios";
 import { DietLabels } from "@/enums/DietLabels";
@@ -55,7 +58,8 @@ import RecipesTable from "@/components/RecipesTable.vue";
     IonButton,
     IonSelect,
     IonSelectOption,
-    RecipesTable
+    RecipesTable,
+    IonContent
   }
 })
 export default class Recipes extends Vue {
@@ -74,6 +78,7 @@ export default class Recipes extends Vue {
       .post(link)
       .then(res => {
         this.recipes = res.data.hits;
+        console.log(this.recipes);
       })
       .catch(error => console.log(error));
   }
@@ -81,7 +86,7 @@ export default class Recipes extends Vue {
   private buildRequestLink() {
     let link = "https://api.edamam.com/search?";
     if (this.searchText.length > 0) link += `q=${this.searchText}`;
-    link += "&app_id=95f121cb&app_key=7ff6f10c068266c24c81c3f07f0570f8";
+    link += "&app_id=ab62d393&app_key=605062d301d4c1b0d4967b013b44df68";
     if (this.selectedDiet.length > 0) link += `&diet=${this.selectedDiet}`;
 
     return link;

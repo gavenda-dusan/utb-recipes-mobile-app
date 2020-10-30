@@ -1,4 +1,5 @@
 import { Ingredient } from "@/models/Ingredient";
+import { TotalNutrients } from './TotalNutrients';
 
 export class Recipe {
     calories!: number;
@@ -7,5 +8,6 @@ export class Recipe {
     image!: string;
     label!: string;
     ingredients!: Array<Ingredient>;
+    totalNutrients: TotalNutrients = new TotalNutrients();
     uri!: string;
 }

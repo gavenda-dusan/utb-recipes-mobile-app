@@ -16,8 +16,12 @@ const routes = [
   {
     path: "/recipe-detail/:link",
     name: "RecipeDetail",
-    
     component: () => import("../views/RecipeDetail.vue")
+  },
+  {
+    path: "/favorites",
+    name: "Favorites",
+    component: () => import("../views/Favorites.vue")
   }
 ]
 
