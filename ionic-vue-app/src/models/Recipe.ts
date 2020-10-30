@@ -3,8 +3,8 @@ import { TotalNutrients } from './TotalNutrients';
 
 export class Recipe {
     calories!: number;
-    dietLabels!: Array<string>;
-    healthLabels!: Array<string>;
+    dietLabels = new Array<string>();
+    healthLabels = new Array<string>();
     image!: string;
     label!: string;
     ingredients!: Array<Ingredient>;

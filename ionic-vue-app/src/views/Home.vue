@@ -15,6 +15,18 @@
         Purpose of the application is to connect to edamam.com recipes API and
         provide recipes to the user.
       </p>
+      <IonGrid>
+        <IonRow>
+          <IonCol>
+            <IonButton href="/recipes">Go to recipe search</IonButton>
+          </IonCol>
+        </IonRow>
+        <IonRow>
+          <IonCol>
+            <IonButton href="/favorites">Go to favorite recipes</IonButton>
+          </IonCol>
+        </IonRow>
+      </IonGrid>
     </IonContent>
   </div>
 </template>
@@ -26,7 +38,12 @@ import {
   IonToolbar,
   IonTitle,
   IonLabel,
-  IonContent
+  IonContent,
+  IonButton,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonItem
 } from "@modus/ionic-vue";
 
 @Options({
@@ -35,7 +52,12 @@ import {
     IonToolbar,
     IonTitle,
     IonLabel,
-    IonContent
+    IonContent,
+    IonButton,
+    IonGrid,
+    IonRow,
+    IonCol,
+    IonItem
   }
 })
 export default class Home extends Vue {}

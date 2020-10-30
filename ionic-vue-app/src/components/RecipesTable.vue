@@ -37,7 +37,6 @@ export default class RecipesTable extends Vue {
   @Prop({ required: true }) recipes = Array<Hit>();
 
   moveToDetail(uri: string) {
-    console.log(this.$router);
     this.$router.push({ name: `RecipeDetail`, params: { link: uri } });
   }
 }

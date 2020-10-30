@@ -13,16 +13,33 @@
             <img v-bind:src="recipe.image" />
           </IonCol>
         </IonRow>
+
+        <IonRow>
+          <IonCol>
+            <IonButton v-if="!isFavorite" @click="addToFavorites()"
+              >Add to favorites</IonButton
+            >
+            <IonButton
+              v-if="isFavorite"
+              @click="removeFromFavorites()"
+              color="danger"
+              >Remove from favorites</IonButton
+            >
+          </IonCol>
+        </IonRow>
+
         <IonItem>
           <IonRow>
             <IonCol>
               <h3>Ingredients</h3>
-              <p
-                v-for="ingredient in recipe.ingredients"
-                :key="ingredient.text"
-              >
-                {{ ingredient.text }}
-              </p>
+              <ul>
+                <li
+                  v-for="ingredient in recipe.ingredients"
+                  :key="ingredient.text"
+                >
+                  {{ ingredient.text }}
+                </li>
+              </ul>
             </IonCol>
           </IonRow>
         </IonItem>
@@ -30,31 +47,51 @@
         <IonItem>
           <IonRow>
             <IonCol>
-              <div>{{ recipe.totalNutrients.ENERC_KCAL.label }}</div>
+              <div>
+                <h4>{{ recipe.totalNutrients.ENERC_KCAL.label }}</h4>
+              </div>
               <div>
                 {{ calories }} {{ recipe.totalNutrients.ENERC_KCAL.unit }}
               </div>
             </IonCol>
             <IonCol>
-              <div>{{ recipe.totalNutrients.SUGAR.label }}</div>
+              <div>
+                <h4>{{ recipe.totalNutrients.SUGAR.label }}</h4>
+              </div>
               <div>{{ sugar }} {{ recipe.totalNutrients.SUGAR.unit }}</div>
             </IonCol>
             <IonCol>
-              <div>{{ recipe.totalNutrients.FAT.label }}</div>
+              <div>
+                <h4>{{ recipe.totalNutrients.FAT.label }}</h4>
+              </div>
               <div>{{ fat }} {{ recipe.totalNutrients.FAT.unit }}</div>
             </IonCol>
             <IonCol>
-              <div>{{ recipe.totalNutrients.PROCNT.label }}</div>
+              <div>
+                <h4>{{ recipe.totalNutrients.PROCNT.label }}</h4>
+              </div>
               <div>{{ protein }} {{ recipe.totalNutrients.PROCNT.unit }}</div>
             </IonCol>
           </IonRow>
         </IonItem>
 
-        <IonRow>
-          <IonCol>
-            <IonButton @click="addToFavorites()">Add to favorites</IonButton>
-          </IonCol>
-        </IonRow>
+        <IonItem v-if="recipe.dietLabels.length > 0">
+          <IonRow>
+            <IonCol>
+              <div><h4>Diet types</h4></div>
+              <div>{{ diet }}</div>
+            </IonCol>
+          </IonRow>
+        </IonItem>
+
+        <IonItem v-if="recipe.healthLabels.length > 0">
+          <IonRow>
+            <IonCol>
+              <div><h4>Health labels</h4></div>
+              <div>{{ health }}</div>
+            </IonCol>
+          </IonRow>
+        </IonItem>
       </IonGrid>
     </IonContent>
   </div>
@@ -97,11 +134,11 @@ export default class RecipesDetail extends Vue {
   private recipe = new Recipe();
   private isFavorite = false;
 
-  mounted() {
+  async mounted() {
     const link = encodeURIComponent(this.$route.params.link as string);
     axios
       .post(
-        `https://api.edamam.com/search?r=${link}&app_id=ab62d393&app_key=605062d301d4c1b0d4967b013b44df68`
+        `https://api.edamam.com/search?r=${link}&app_id=95f121cb&app_key=7ff6f10c068266c24c81c3f07f0570f8`
       )
       .then(res => {
         if (res.data.length > 0) {
@@ -109,6 +146,8 @@ export default class RecipesDetail extends Vue {
         }
       })
       .catch(error => console.log(error));
+
+    await this.checkIfFavorite();
   }
 
   get calories() {
@@ -127,6 +166,32 @@ export default class RecipesDetail extends Vue {
     return this.recipe.totalNutrients.PROCNT.quantity.toFixed(0);
   }
 
+  get diet() {
+    let dietString = "";
+    this.recipe.dietLabels.forEach(diet => {
+      if (dietString === "") {
+        dietString += diet;
+      } else {
+        dietString += `, ${diet}`;
+      }
+    });
+
+    return dietString;
+  }
+
+  get health() {
+    let healthString = "";
+    this.recipe.healthLabels.forEach(health => {
+      if (healthString === "") {
+        healthString += health;
+      } else {
+        healthString += `, ${health}`;
+      }
+    });
+
+    return healthString;
+  }
+
   async addToFavorites() {
     await Storage.set({
       key: `favorite-${this.recipe.uri}`,
@@ -135,6 +200,22 @@ export default class RecipesDetail extends Vue {
         uri: this.recipe.uri
       })
     });
+    this.isFavorite = true;
+  }
+
+  async removeFromFavorites() {
+    await Storage.remove({ key: `favorite-${this.recipe.uri}` });
+    this.isFavorite = false;
+  }
+
+  async checkIfFavorite() {
+    const { value } = await Storage.get({
+      key: `favorite-${this.$route.params.link}`
+    });
+
+    if (value !== null && value !== undefined) {
+      this.isFavorite = true;
+    }
   }
 }
 </script>

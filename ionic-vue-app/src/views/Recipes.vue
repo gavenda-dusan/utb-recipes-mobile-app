@@ -78,7 +78,6 @@ export default class Recipes extends Vue {
       .post(link)
       .then(res => {
         this.recipes = res.data.hits;
-        console.log(this.recipes);
       })
       .catch(error => console.log(error));
   }
