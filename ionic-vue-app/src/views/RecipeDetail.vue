@@ -1,5 +1,5 @@
 <template>
-  <div class="ion-page">
+  <div class="ion-page" v-if="isLoaded">
     <IonHeader>
       <IonToolbar>
         <IonTitle>{{ recipe.label }}</IonTitle>
@@ -133,6 +133,7 @@ const { Storage } = Plugins;
 export default class RecipesDetail extends Vue {
   private recipe = new Recipe();
   private isFavorite = false;
+  private isLoaded = false;
 
   async mounted() {
     const link = encodeURIComponent(this.$route.params.link as string);
@@ -143,6 +144,7 @@ export default class RecipesDetail extends Vue {
       .then(res => {
         if (res.data.length > 0) {
           this.recipe = res.data[0];
+          this.isLoaded = true;
         }
       })
       .catch(error => console.log(error));

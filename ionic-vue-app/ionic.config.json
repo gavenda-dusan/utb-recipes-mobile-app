@@ -1,5 +1,7 @@
 {
-  "name": "ionic-app",
-  "integrations": {},
+  "name": "utb-recipes-app",
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "vue"
 }
