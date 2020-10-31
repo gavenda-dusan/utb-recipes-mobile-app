@@ -5,20 +5,9 @@
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Compiles and hot-reloads for development on localhost:8100
 ```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
+ionic serve
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Deploy to android device by opening android folder in Android Studio and run
